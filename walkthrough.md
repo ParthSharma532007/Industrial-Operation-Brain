@@ -8,6 +8,12 @@ This walkthrough outlines all key deliverables for the **Unified Asset & Operati
 
 The prototype is a fully functioning Single Page Application (SPA) backed by a Node.js/Express server using MVC architecture. It features raw text OCR ingestion, custom physics-based graph rendering, a RAG copilot with document citation, and automatic compliance and failure analysis (RCA).
 
+### How to Access
+
+- **Live Deployed Prototype**: [https://industrial-operation-brain.onrender.com/](https://industrial-operation-brain.onrender.com/)
+
+---
+
 ### How to Run Locally
 
 1. **Verify/Install Node.js Dependencies** (Run inside the workspace directory):
@@ -77,7 +83,8 @@ graph TD
 
 We have built a dedicated **Pitch Deck / Presentation** served directly by the web server. It contains slides covering the market challenge (the industrial knowledge cliff), our universal ingestion pipeline, core value propositions, and future roadmaps.
 
-- **Access URL**: [http://localhost:3000/presentation.html](http://localhost:3000/presentation.html)
+- **Live Deployed Deck**: [https://industrial-operation-brain.onrender.com/presentation.html](https://industrial-operation-brain.onrender.com/presentation.html)
+- **Local Dev Deck**: [http://localhost:3000/presentation.html](http://localhost:3000/presentation.html)
 - **Source File**: [presentation.html](file:///c:/Users/Parth/hackathon%20-%20AI%20for%20Industrial%20Knowledge%20Intelligence/public/presentation.html)
 
 > [!TIP]
@@ -90,6 +97,9 @@ We have built a dedicated **Pitch Deck / Presentation** served directly by the w
 Here is the automatically recorded walk-through demonstration showing the prototype in action:
 
 ### Walkthrough Demo Video
+- **MP4 Video Format (Standard):** [operations_brain_demo.mp4](operations_brain_demo.mp4)
+- **WebP Animation Format:** [operations_brain_demo.webp](operations_brain_demo.webp)
+
 ![Operations Brain Walkthrough Demo](operations_brain_demo.webp)
 
 ---
