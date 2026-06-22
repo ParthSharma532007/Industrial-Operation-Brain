@@ -81,8 +81,9 @@ graph TD
 
 ## 📢 3. Presentation Deck
 
-We have built a dedicated **Pitch Deck / Presentation** served directly by the web server. It contains slides covering the market challenge (the industrial knowledge cliff), our universal ingestion pipeline, core value propositions, and future roadmaps.
+We have built a dedicated **Pitch Deck / Presentation** served directly by the web server, as well as a downloadable PowerPoint presentation.
 
+- **PowerPoint File (PPTX)**: [presentation_deck.pptx](presentation_deck.pptx)
 - **Live Deployed Deck**: [https://industrial-operation-brain.onrender.com/presentation.html](https://industrial-operation-brain.onrender.com/presentation.html)
 - **Local Dev Deck**: [http://localhost:3000/presentation.html](http://localhost:3000/presentation.html)
 - **Source File**: [presentation.html](file:///c:/Users/Parth/hackathon%20-%20AI%20for%20Industrial%20Knowledge%20Intelligence/public/presentation.html)
