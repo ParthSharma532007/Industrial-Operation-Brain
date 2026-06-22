@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Operations Brain - Knowledge Intelligence Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Load FontAwesome icons for rich visuals -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside>
+    <div class="brand">
+      <div class="brand-logo">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div class="brand-title">Operations Brain</div>
+    </div>
+    
+    <ul class="nav-links">
+      <li class="nav-item active" data-tab="dashboard-tab">
+        <button><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+      </li>
+      <li class="nav-item" data-tab="ingest-tab">
+        <button><i class="fa-solid fa-file-import"></i> Document Ingestor</button>
+      </li>
+      <li class="nav-item" data-tab="graph-tab">
+        <button><i class="fa-solid fa-diagram-project"></i> Knowledge Graph</button>
+      </li>
+      <li class="nav-item" data-tab="chat-tab">
+        <button><i class="fa-solid fa-comments"></i> Expert Copilot</button>
+      </li>
+      <li class="nav-item" data-tab="maint-tab">
+        <button><i class="fa-solid fa-screwdriver-wrench"></i> Maintenance & RCA</button>
+      </li>
+      <li class="nav-item" data-tab="compliance-tab">
+        <button><i class="fa-solid fa-shield-halved"></i> Compliance Hub</button>
+      </li>
+    </ul>
+
+    <div class="user-profile">
+      <div class="avatar">PE</div>
+      <div class="profile-info">
+        <span class="profile-name">Parth E.</span>
+        <span class="profile-role">Plant Engineer</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Frame -->
+  <main>
+    <header>
+      <div class="page-title-area">
+        <h2 id="current-page-title">Operational Dashboard</h2>
+      </div>
+      
+      <div class="system-status">
+        <a href="/presentation.html" target="_blank" class="presentation-header-link" style="color: var(--accent-cyan); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(0, 216, 255, 0.2); padding: 6px 12px; border-radius: 20px; transition: var(--transition-smooth); background: rgba(0, 216, 255, 0.04);">
+          <i class="fa-solid fa-person-chalkboard"></i>
+          <span>Pitch Deck</span>
+        </a>
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span>Active Operations Brain Online</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <!-- TAB 1: Unified Dashboard -->
+      <section id="dashboard-tab" class="tab-pane active">
+        <div class="grid-container grid-3" style="margin-bottom: 24px;">
+          
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-heart-pulse"></i> Plant Safety & Health</span>
+            </div>
+            <div class="plant-health-arc">
+              <span class="plant-health-value" id="dash-health-score">87%</span>
+              <span class="plant-health-label">System Health</span>
+            </div>
+            <div class="metric-trend trend-stable" style="justify-content: center; margin-top: 10px;">
+              <i class="fa-solid fa-circle-check"></i> Overall asset systems stable
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-clock"></i> Unplanned Downtime (YTD)</span>
+            </div>
+            <div class="metric-value" style="color: var(--accent-rose);">18.2 hrs</div>
+            <div class="metric-trend trend-down">
+              <i class="fa-solid fa-arrow-trend-down"></i> -4.2 hrs from last year average
+            </div>
+            <div style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+              RCA remediation prevented 2 additional outage loops.
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-clipboard-list"></i> Compliance Auditing</span>
+            </div>
+            <div class="metric-value" style="color: var(--accent-emerald);" id="dash-compliance-percent">66%</div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-circle-exclamation" style="color: var(--accent-amber);"></i> 1 Overdue Action (PESO Control Valve)
+            </div>
+          </div>
+
+        </div>
+
+        <div class="grid-container grid-2-1">
+          
+          <!-- Live Alerts -->
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-amber);"></i> Active Plant Alerts</span>
+            </div>
+            <div class="asset-status-list" id="dashboard-alerts-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Quick Statistics -->
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-database"></i> Knowledge Base Summary</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 15px; font-size: 14px;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <span class="text-muted"><i class="fa-solid fa-microchip"></i> Monitored Assets</span>
+                <span id="dash-stat-assets" style="font-weight: 600;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <span class="text-muted"><i class="fa-solid fa-file-pdf"></i> Ingested Documents</span>
+                <span id="dash-stat-docs" style="font-weight: 600;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <span class="text-muted"><i class="fa-solid fa-circle-nodes"></i> Knowledge Graph Links</span>
+                <span id="dash-stat-links" style="font-weight: 600;">0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted"><i class="fa-solid fa-file-shield"></i> Regulatory Safeguards</span>
+                <span id="dash-stat-rules" style="font-weight: 600;">0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2: Document Ingestor -->
+      <section id="ingest-tab" class="tab-pane">
+        <div class="grid-container grid-2-1">
+          
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Document (PDF/Manual/Report)</span>
+            </div>
+            
+            <form id="upload-doc-form">
+              <div class="form-group">
+                <label>Document Title</label>
+                <input type="text" id="upload-title" class="form-input" placeholder="e.g. HCU Loop V-202 Bypass SOP" required>
+              </div>
+
+              <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                <div>
+                  <label>Document Type</label>
+                  <select id="upload-type" class="form-select">
+                    <option value="Operating Procedure">Operating Procedure (SOP)</option>
+                    <option value="Engineering Drawing">Engineering Drawing</option>
+                    <option value="Regulatory Standard">Regulatory Standard</option>
+                    <option value="Incident Record">Incident Record</option>
+                    <option value="Other Document">Other Document</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Category</label>
+                  <select id="upload-category" class="form-select">
+                    <option value="SOP">SOP</option>
+                    <option value="P&ID">P&ID</option>
+                    <option value="Regulation">Regulation</option>
+                    <option value="Incident">Incident</option>
+                    <option value="General">General</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 10px;">
+                <label>Document Content (Raw OCR Text Ingest)</label>
+                <textarea id="upload-content" class="text-area-input" placeholder="Paste structural text content of document or OCR output here..." required></textarea>
+              </div>
+
+              <button type="submit" class="upload-btn" style="width: 100%;"><i class="fa-solid fa-gear"></i> Run AI Entity Extraction & Link Graph</button>
+            </form>
+
+            <div id="upload-status" style="margin-top: 15px; font-size: 13px; text-align: center;"></div>
+          </div>
+
+          <!-- Document List & Extraction Preview -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <div class="glass-card" id="extraction-preview-card" style="display: none;">
+              <div class="glass-card-header">
+                <span class="glass-card-title" style="color: var(--accent-emerald);"><i class="fa-solid fa-brain"></i> AI Extracted Entities</span>
+              </div>
+              <div style="font-size: 13px; margin-bottom: 10px;" id="extracted-msg"></div>
+              <div class="entities-grid" id="extracted-badge-container">
+                <!-- badges added by JS -->
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="glass-card-header">
+                <span class="glass-card-title"><i class="fa-solid fa-folder-open"></i> Document Library</span>
+              </div>
+              <div style="max-height: 380px; overflow-y: auto;">
+                <div class="asset-status-list" id="ingested-docs-list">
+                  <!-- dynamically loaded -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 3: Knowledge Graph -->
+      <section id="graph-tab" class="tab-pane">
+        <div class="glass-card" style="margin-bottom: 20px;">
+          <div class="glass-card-header">
+            <span class="glass-card-title"><i class="fa-solid fa-diagram-project"></i> Dynamic Asset & Operations Knowledge Graph</span>
+            <div>
+              <button class="rca-btn" id="btn-refresh-graph" style="background: rgba(0, 216, 255, 0.1); border-color: rgba(0, 216, 255, 0.3); color: var(--accent-cyan);"><i class="fa-solid fa-arrows-rotate"></i> Reset Layout</button>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 15px;">
+            Physics-based 2D Knowledge Graph mapping links between assets (Cyan), documentation (Purple), rules (Green), and historical incident nodes (Red). Drag nodes to reposition. Click nodes to inspect detailed meta-attributes.
+          </p>
+
+          <!-- Graph Drawing Viewport -->
+          <div class="graph-viewport">
+            <canvas id="graph-canvas"></canvas>
+            
+            <div class="graph-legend">
+              <div class="legend-item">
+                <div class="legend-color color-equip"></div>
+                <span>Asset Equipment</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color color-doc"></div>
+                <span>Document Core</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color color-reg"></div>
+                <span>Safety / Regulations</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color color-inc"></div>
+                <span>Failure / Incident Logs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" id="graph-node-details-card" style="display: none;">
+          <div class="glass-card-header">
+            <span class="glass-card-title"><i class="fa-solid fa-circle-info"></i> Node Property Inspector</span>
+          </div>
+          <div id="graph-node-inspector-body" style="font-size: 14px; line-height: 1.6;">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: Expert Copilot -->
+      <section id="chat-tab" class="tab-pane">
+        <div class="chat-layout">
+          
+          <div class="chat-panel">
+            <div class="chat-history" id="chat-conversation">
+              
+              <div class="chat-bubble bubble-ai">
+                <div class="confidence-indicator"><i class="fa-solid fa-circle-check"></i> 100% Match</div>
+                <h3>Industrial Intelligence Copilot ready.</h3>
+                <p>Hello! I am your operational assistant. I possess a unified understanding of active plant instrumentation diagrams, safety procedures, and past breakdown incident reports.</p>
+                <p>Try asking me questions such as:</p>
+                <ul>
+                  <li>"What is the isolation procedure for feed pump P-101?"</li>
+                  <li>"Show me the historic incidents and vibration issues for control valve V-202."</li>
+                  <li>"Which regulations govern safety valves and LPG storage tanks?"</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="chat-input-bar">
+              <input type="text" id="chat-input-field" class="chat-text-input" placeholder="Type your engineering, maintenance, or compliance question here...">
+              <button id="chat-send-btn" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+
+          <!-- Suggested queries & filters sidebar -->
+          <div class="chat-sidebar">
+            <h4 style="font-size: 14px; font-weight: 600; color:#fff;"><i class="fa-solid fa-lightbulb" style="color: var(--accent-amber);"></i> Suggested Queries</h4>
+            <div class="suggested-chips">
+              <button class="suggested-chip" data-query="Isolation checklist and LOTO details for feed pump P-101">"Isolation and LOTO steps for P-101"</button>
+              <button class="suggested-chip" data-query="What was the root cause and mitigation for V-202 control valve leak incident?">"Root cause of V-202 leak incident"</button>
+              <button class="suggested-chip" data-query="Overdue safety testing and compliance laws for LPG Storage Tank T-301">"LPG Tank T-301 regulatory status"</button>
+              <button class="suggested-chip" data-query="How does Factories Act Section 21 affect Centrifugal Feed Pump maintenance?">"Factories Act Section 21 and P-101"</button>
+            </div>
+            
+            <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; font-size: 12px; color: var(--text-muted);">
+              <strong>Search Engine Parameters</strong>
+              <div style="margin-top: 10px; display: flex; justify-content: space-between;">
+                <span>Retrieval Strategy</span>
+                <span style="color:#fff;">Dense + Graph Context</span>
+              </div>
+              <div style="margin-top: 6px; display: flex; justify-content: space-between;">
+                <span>Confidence Threshold</span>
+                <span style="color:#fff;">> 45%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 5: Maintenance & RCA -->
+      <section id="maint-tab" class="tab-pane">
+        <div class="grid-container grid-2-1">
+          
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-list-check"></i> Asset Health & Active Maintenance Tickets</span>
+            </div>
+            <div class="asset-status-list" id="maintenance-assets-list">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+
+          <!-- FMEA Reference -->
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <span class="glass-card-title"><i class="fa-solid fa-triangle-exclamation"></i> Plant Risk Matrix (FMEA)</span>
+            </div>
+            <div style="font-size: 13px; line-height: 1.5;">
+              <div style="background: rgba(255,61,0,0.05); border: 1px solid rgba(255,61,0,0.15); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                <strong style="color: var(--accent-rose);">[CRITICAL] V-202 Seat Fatigue</strong>
+                <p style="color: var(--text-muted); margin-top: 4px;">Occurrences of stem packing friction cycles trigger high thermal fatigue leak risks. Severity: 9/10.</p>
+              </div>
+              <div style="background: rgba(255,145,0,0.05); border: 1px solid rgba(255,145,0,0.15); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                <strong style="color: var(--accent-amber);">[HIGH] P-101 Bearing Wear</strong>
+                <p style="color: var(--text-muted); margin-top: 4px;">Continuous operation dry-running risks shaft degradation or seizure. Severity: 7/10.</p>
+              </div>
+              <div style="background: rgba(0,216,255,0.05); border: 1px solid rgba(0,216,255,0.15); border-radius: 8px; padding: 12px;">
+                <strong style="color: var(--accent-cyan);">[MEDIUM] HE-401 Shell Fouling</strong>
+                <p style="color: var(--text-muted); margin-top: 4px;">Fouling from heavy crude reduction leads to lower heat duty transfers. Severity: 5/10.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hidden initially. Displays generated RCA reports -->
+        <div class="glass-card rca-report-container" id="rca-output-card" style="display: none;">
+          <div class="rca-header">
+            <span class="rca-title-text" id="rca-card-title">Root Cause Analysis Report</span>
+            <span class="rca-confidence-badge" id="rca-confidence">Confidence Score: 85%</span>
+          </div>
+          
+          <div class="grid-container grid-2-1" style="gap: 20px;">
+            <div>
+              <div class="rca-section">
+                <div class="rca-section-title">Plant Chronology & Chain of Events</div>
+                <div id="rca-chronology-container">
+                  <!-- filled by JS -->
+                </div>
+              </div>
+
+              <div class="rca-section">
+                <div class="rca-section-title">Causal Hypotheses & Evidence Matching</div>
+                <div id="rca-hypotheses-container">
+                  <!-- filled by JS -->
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="rca-section">
+                <div class="rca-section-title">Optimized Repair Actions & LOTO Guidelines</div>
+                <div id="rca-actions-container" style="display: flex; flex-direction: column; gap: 8px;">
+                  <!-- filled by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: Compliance Hub -->
+      <section id="compliance-tab" class="tab-pane">
+        <div class="glass-card" style="margin-bottom: 24px;">
+          <div class="glass-card-header">
+            <span class="glass-card-title"><i class="fa-solid fa-file-shield"></i> Regulatory Compliance & Safety Audits</span>
+            <button class="audit-action-btn" id="btn-export-peso"><i class="fa-solid fa-file-contract"></i> Build PESO Audit Package</button>
+          </div>
+          
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 15px;">
+            Monitors Indian industrial guidelines (PESO Static and Mobile Pressure Vessels Rules, Factory Act 1948) mapped against physical plant assets, last test certification logs, and active maintenance checks.
+          </p>
+
+          <table id="compliance-table">
+            <thead>
+              <tr>
+                <th>Safety Standard Name</th>
+                <th>Authority Code</th>
+                <th>Target Asset</th>
+                <th>Last Audit Date</th>
+                <th>Frequency</th>
+                <th>Audit Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="compliance-rows">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- POPUP: Document Detail Viewer -->
+  <div class="overlay-viewer" id="doc-viewer-overlay">
+    <div class="overlay-modal">
+      <div class="overlay-header">
+        <h3 id="overlay-doc-title">Document Title</h3>
+        <button class="close-overlay-btn" id="btn-close-overlay">&times;</button>
+      </div>
+      <div id="overlay-doc-body" style="font-size: 14px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px;">
+        <!-- text content -->
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
+        <strong>Ingested Entities:</strong>
+        <div class="entities-grid" id="overlay-doc-entities" style="margin-top: 8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP: Compliance Package Download View -->
+  <div class="overlay-viewer" id="audit-package-overlay">
+    <div class="overlay-modal" style="max-width: 750px;">
+      <div class="overlay-header">
+        <h3><i class="fa-solid fa-file-contract" style="color: var(--accent-emerald);"></i> Compliance Audit Evidence Package</h3>
+        <button class="close-overlay-btn" id="btn-close-audit-overlay">&times;</button>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">
+        Generated verified PDF/JSON payload for auditing agencies. Contains physical test logs, linked drawings, and digital verification signatures.
+      </p>
+      
+      <div class="audit-modal-body" id="audit-package-json">
+        <!-- raw JSON formatted -->
+      </div>
+
+      <div class="audit-modal-footer">
+        <button class="rca-btn" id="btn-download-audit-file" style="background: var(--accent-emerald); border-color: var(--accent-emerald); color: #000;"><i class="fa-solid fa-download"></i> Download Audit File</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+{
+  "assets": [
+    {
+      "id": "P-101",
+      "name": "Centrifugal Feed Pump",
+      "location": "Hydrocracker Unit (HCU) - Zone 1",
+      "criticality": "High",
+      "status": "Active",
+      "specs": {
+        "flowRate": "120 m³/h",
+        "head": "85 m",
+        "powerRating": "45 kW",
+        "operatingTemp": "45°C",
+        "maxPressure": "16 bar"
+      },
+      "healthScore": 92,
+      "metrics": {
+        "vibration": "1.4 mm/s",
+        "temperature": "42°C",
+        "runningHours": "4210 hrs"
+      }
+    },
+    {
+      "id": "V-202",
+      "name": "High-Pressure Control Valve",
+      "location": "HCU Feed Line - Zone 2",
+      "criticality": "High",
+      "status": "Degraded",
+      "specs": {
+        "size": "4 inches",
+        "pressureClass": "ANSI 600#",
+        "actuator": "Pneumatic Diaphragm",
+        "failSafe": "Fail Close",
+        "maxPressure": "45 bar"
+      },
+      "healthScore": 64,
+      "metrics": {
+        "vibration": "6.8 mm/s",
+        "temperature": "118°C",
+        "runningHours": "8940 hrs"
+      }
+    },
+    {
+      "id": "T-301",
+      "name": "LPG Storage Tank",
+      "location": "Tank Farm - Zone A",
+      "criticality": "Critical",
+      "status": "Active",
+      "specs": {
+        "capacity": "250 m³",
+        "designPressure": "17.2 bar",
+        "designTemp": "-10 to 55°C",
+        "medium": "Liquefied Petroleum Gas (LPG)"
+      },
+      "healthScore": 98,
+      "metrics": {
+        "level": "78.4 %",
+        "pressure": "8.2 bar",
+        "temperature": "32.1°C"
+      }
+    },
+    {
+      "id": "HE-401",
+      "name": "Shell & Tube Heat Exchanger",
+      "location": "HCU Pre-heat Train",
+      "criticality": "Medium",
+      "status": "Active",
+      "specs": {
+        "heatDuty": "12.5 MW",
+        "shellPressure": "10 bar",
+        "tubePressure": "28 bar",
+        "tubeMedium": "Crude oil",
+        "shellMedium": "Heavy Gas Oil"
+      },
+      "healthScore": 87,
+      "metrics": {
+        "vibration": "0.8 mm/s",
+        "shellInletTemp": "145°C",
+        "shellOutletTemp": "98°C"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc_pid_ref_01",
+      "title": "P&ID HCU Feed Circuit Piping & Instrumentation Diagram",
+      "type": "Engineering Drawing",
+      "category": "P&ID",
+      "filePath": "/uploads/pid_hcu_feed_01.pdf",
+      "content": "Piping & Instrumentation Diagram for Hydrocracker Unit Feed Circuit. Shows piping connections, instrumentation loops, and control interlocks. Feed pump P-101 discharges crude oil into the pre-heat train heat exchanger HE-401. Flow rate is controlled by high-pressure control valve V-202 downstream of HE-401. Safe operating pressure limit for HCU line is 40 bar. Control loop LIC-202 measures level in upstream drum and modulates V-202. Interlock I-101 trips pump P-101 if flow falls below 10 m3/h to prevent dry run and pump seizure. Drafted: March 2021 by Design Engineering Dept.",
+      "entities": [
+        {"text": "P-101", "type": "EquipmentTag", "refId": "P-101"},
+        {"text": "V-202", "type": "EquipmentTag", "refId": "V-202"},
+        {"text": "HE-401", "type": "EquipmentTag", "refId": "HE-401"},
+        {"text": "40 bar", "type": "ProcessParameter", "label": "Max Operating Pressure"},
+        {"text": "LIC-202", "type": "InstrumentTag", "label": "Level Controller"}
+      ],
+      "uploadDate": "2026-01-10T10:00:00Z"
+    },
+    {
+      "id": "doc_sop_pump_maint",
+      "title": "Standard Operating Procedure: Centrifugal Pump Isolation and Maintenance",
+      "type": "Operating Procedure",
+      "category": "SOP",
+      "filePath": "/uploads/sop_pump_maint.pdf",
+      "content": "Standard Operating Procedure for Maintenance and Overhaul of Centrifugal Pumps (applicable to Feed Pump P-101). 1. PRE-REQUISITES: Wear appropriate PPE: safety helmet, safety shoes, safety goggles, chemical-resistant gloves, and gas detector. Obtain valid Permit to Work (PTW) and Cold Work Permit. 2. ISOLATION: Switch off pump motor from local station and lock out/tag out (LOTO) breaker at the Substation Electrical Panel. Close pump suction valve completely and secure with chain-lock. Close pump discharge valve. Open drain valve slowly and drain liquid to the closed blowdown system. Vent casing pressure completely. Verify zero energy state: local pressure gauge must show 0 bar. 3. MAINTENANCE: Clean pump body, inspect coupling alignment. Re-grease bearings or replace mechanical seal if leakage is noted. 4. RESTORATION: Close drains and vents. Remove LOTO. Crack open suction valve to prime casing. Start motor and verify rotation, vibration, and seal integrity. Complies with Factory Act Section 21: Fencing of machinery.",
+      "entities": [
+        {"text": "P-101", "type": "EquipmentTag", "refId": "P-101"},
+        {"text": "0 bar", "type": "ProcessParameter", "label": "De-pressurized State"},
+        {"text": "LOTO", "type": "SafetyProcedure", "label": "Lock-Out Tag-Out"},
+        {"text": "Factory Act Section 21", "type": "RegulatoryReference", "label": "Machinery Fencing"}
+      ],
+      "uploadDate": "2026-02-15T11:30:00Z"
+    },
+    {
+      "id": "doc_sop_valve_calib",
+      "title": "SOP: High-Pressure Control Valve Calibration and Seat Inspection",
+      "type": "Operating Procedure",
+      "category": "SOP",
+      "filePath": "/uploads/sop_valve_calib.pdf",
+      "content": "Standard Procedure for Calibrating Control Valve Actuators and Inspecting Seats (applicable to V-202). 1. WARNING: Control valve V-202 operates under high pressure (max 45 bar) and thermal stresses (up to 120°C). 2. ISOLATION: Confirm bypass valve is open if line must remain active, otherwise shut off flow. Connect instrument air pressure regulator. Stroke the valve from 0%, 25%, 50%, 75% to 100% and record valve stem travel. Calibrate digital positioner. Inspect gland packing for wear. If seat leakage is suspected, perform helium leak test or replace valve plug. Gland packing must be checked for vibration fatigue. Under PESO Static and Mobile Pressure Vessels Rules, relief lines and regulating valves must be inspected annually for mechanical fatigue.",
+      "entities": [
+        {"text": "V-202", "type": "EquipmentTag", "refId": "V-202"},
+        {"text": "45 bar", "type": "ProcessParameter", "label": "Max Pressure Class"},
+        {"text": "120°C", "type": "ProcessParameter", "label": "Max Temperature Class"},
+        {"text": "PESO Static and Mobile Pressure Vessels Rules", "type": "RegulatoryReference", "label": "SMPV Rules"}
+      ],
+      "uploadDate": "2026-03-01T09:15:00Z"
+    },
+    {
+      "id": "doc_peso_gas_rules",
+      "title": "PESO Static and Mobile Pressure Vessels (Unfired) Rules - Relief Valve Guidelines",
+      "type": "Regulatory Standard",
+      "category": "Regulation",
+      "filePath": "/uploads/peso_rules_relief_valves.pdf",
+      "content": "Petroleum and Explosives Safety Organization (PESO) Guidelines. Rule 18: Every pressure vessel in service shall be fitted with a safety valve or other protective device. Safety valves shall be set to discharge at a pressure not exceeding the maximum allowable working pressure (MAWP). Testing and inspection frequency: Safety relief valves must undergo hydrostatic testing every 2 years, and visual inspection and seat calibration every 1 year. Certificates of safety testing must be signed by a PESO-authorized competent person and recorded in Form VIII. Applies to LPG Storage Tank T-301 and high-pressure regulating loops including V-202.",
+      "entities": [
+        {"text": "T-301", "type": "EquipmentTag", "refId": "T-301"},
+        {"text": "V-202", "type": "EquipmentTag", "refId": "V-202"},
+        {"text": "Rule 18", "type": "RegulatoryReference", "label": "Safety Valve Testing"},
+        {"text": "Form VIII", "type": "RegulatoryDocument", "label": "Competent Person Certificate"},
+        {"text": "every 1 year", "type": "ProcessFrequency", "label": "Safety Valve Calibration"}
+      ],
+      "uploadDate": "2026-01-05T14:00:00Z"
+    },
+    {
+      "id": "doc_incident_v202_2025",
+      "title": "Incident Report: Control Valve V-202 Thermal Fatigue Leak (Oct 2025)",
+      "type": "Incident Record",
+      "category": "Incident",
+      "filePath": "/uploads/incident_v202_oct2025.pdf",
+      "content": "Incident investigation report. Date of occurrence: October 18, 2025. Description: A hydrocarbon vapor leak was detected at the packing gland flange of Control Valve V-202 in HCU Feed Line. The line was shut down immediately, causing 18 hours of unplanned plant downtime. Root Cause Analysis: The investigation revealed that thermal fatigue and vibration of the actuator caused loose bolting on the packing gland. Temperature cycles reached 118°C while vibration was recorded at 6.5 mm/s. The gland packing material was dry and cracked. Corrective Action: Replaced gland packing with high-density graphite ring. Implemented a mandatory vibration check every month, and packing inspection every 6 months. Relinked to SOP for V-202 calibration to include tightening torque specifications (45 Nm).",
+      "entities": [
+        {"text": "V-202", "type": "EquipmentTag", "refId": "V-202"},
+        {"text": "118°C", "type": "ProcessParameter", "label": "Operating Temp during Incident"},
+        {"text": "6.5 mm/s", "type": "ProcessParameter", "label": "Vibration during Incident"},
+        {"text": "45 Nm", "type": "MaintenanceSpecification", "label": "Gland Torque"}
+      ],
+      "uploadDate": "2025-10-25T16:45:00Z"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "node_P-101", "label": "Feed Pump P-101", "group": "Equipment", "details": "Centrifugal Feed Pump - HCU Zone 1"},
+      {"id": "node_V-202", "label": "Control Valve V-202", "group": "Equipment", "details": "High-Pressure Control Valve - HCU Zone 2"},
+      {"id": "node_T-301", "label": "LPG Tank T-301", "group": "Equipment", "details": "LPG Storage Tank - Tank Farm"},
+      {"id": "node_HE-401", "label": "Exchanger HE-401", "group": "Equipment", "details": "Shell & Tube Heat Exchanger - HCU"},
+      {"id": "node_doc_pid", "label": "Drawing: HCU Feed P&ID", "group": "Document", "details": "pid_ref_01.pdf"},
+      {"id": "node_doc_sop_pump", "label": "SOP: Pump Isolation", "group": "Document", "details": "sop_pump_maint.pdf"},
+      {"id": "node_doc_sop_valve", "label": "SOP: Valve Calibration", "group": "Document", "details": "sop_valve_calib.pdf"},
+      {"id": "node_reg_peso", "label": "PESO Rules (Rule 18)", "group": "Regulation", "details": "Safety valves & pressure vessels"},
+      {"id": "node_reg_factories", "label": "Factory Act Sec 21", "group": "Regulation", "details": "Machinery Guarding"},
+      {"id": "node_inc_v202_leak", "label": "Incident: V-202 Leak", "group": "Incident", "details": "Thermal Fatigue Leak - Oct 2025"}
+    ],
+    "edges": [
+      {"id": "edge_1", "from": "node_P-101", "to": "node_doc_pid", "label": "depicted_in"},
+      {"id": "edge_2", "from": "node_V-202", "to": "node_doc_pid", "label": "depicted_in"},
+      {"id": "edge_3", "from": "node_HE-401", "to": "node_doc_pid", "label": "depicted_in"},
+      {"id": "edge_4", "from": "node_P-101", "to": "node_doc_sop_pump", "label": "governed_by"},
+      {"id": "edge_5", "from": "node_V-202", "to": "node_doc_sop_valve", "label": "governed_by"},
+      {"id": "edge_6", "from": "node_P-101", "to": "node_reg_factories", "label": "monitored_under"},
+      {"id": "edge_7", "from": "node_V-202", "to": "node_reg_peso", "label": "subject_to"},
+      {"id": "edge_8", "from": "node_T-301", "to": "node_reg_peso", "label": "governed_by"},
+      {"id": "edge_9", "from": "node_V-202", "to": "node_inc_v202_leak", "label": "experienced"},
+      {"id": "edge_10", "from": "node_inc_v202_leak", "to": "node_doc_sop_valve", "label": "mitigated_by"}
+    ]
+  },
+  "workOrders": [
+    {
+      "id": "WO-9081",
+      "assetId": "P-101",
+      "title": "Annual Bearing Replacement & Alignment",
+      "type": "Preventive",
+      "status": "Completed",
+      "scheduledDate": "2026-03-12",
+      "completedDate": "2026-03-12",
+      "performedBy": "R. Kumar (Maint Engineer)",
+      "findings": "Bearings showed mild scoring. Replaced with OEM parts. Re-aligned coupling. Running vibs reduced from 2.8 mm/s to 1.4 mm/s.",
+      "sopChecked": "doc_sop_pump_maint"
+    },
+    {
+      "id": "WO-9104",
+      "assetId": "V-202",
+      "title": "Gland Packing Replacement & Torque",
+      "type": "Corrective",
+      "status": "Completed",
+      "scheduledDate": "2026-05-18",
+      "completedDate": "2026-05-18",
+      "performedBy": "S. Patil (Technician)",
+      "findings": "Inspected packing gland during scheduled plant shutdown. Replaced standard packing with high-density graphite rings as recommended in incident report incident_v202_2025. Torqued to 45 Nm.",
+      "sopChecked": "doc_sop_valve_calib"
+    },
+    {
+      "id": "WO-9201",
+      "assetId": "V-202",
+      "title": "High Vibration & Actuator Noise Analysis",
+      "type": "Breakdown",
+      "status": "Pending",
+      "scheduledDate": "2026-06-20",
+      "completedDate": null,
+      "performedBy": "Maint Team B",
+      "findings": "Active high vibration (6.8 mm/s) on V-202 actuator housing. Audible rattling. Operator raised alert. Suspected loose mountings or positioner feedback linkage degradation.",
+      "sopChecked": "doc_sop_valve_calib"
+    }
+  ],
+  "compliance": [
+    {
+      "id": "comp_01",
+      "ruleName": "Safety Relief Valve Calibration",
+      "authority": "PESO Rules Rule 18",
+      "frequency": "Annual",
+      "targetAsset": "T-301",
+      "lastAuditDate": "2025-08-10",
+      "status": "Compliant",
+      "evidenceDoc": "doc_peso_gas_rules",
+      "notes": "Testing certified on Form VIII by authorized inspector. Next hydrotest due Aug 2027."
+    },
+    {
+      "id": "comp_02",
+      "ruleName": "Machinery Guarding & Physical Safety Fencing",
+      "authority": "Factories Act Section 21",
+      "frequency": "Continuous",
+      "targetAsset": "P-101",
+      "lastAuditDate": "2026-01-20",
+      "status": "Compliant",
+      "evidenceDoc": "doc_sop_pump_maint",
+      "notes": "Coupling guard checked and locked. Standard safety signs visible."
+    },
+    {
+      "id": "comp_03",
+      "ruleName": "High Pressure Pipeline Control Valve Inspection",
+      "authority": "PESO SMPV Rules / Operating Safety",
+      "frequency": "Annual",
+      "targetAsset": "V-202",
+      "lastAuditDate": "2025-05-10",
+      "status": "Non-Compliant",
+      "evidenceDoc": "doc_sop_valve_calib",
+      "notes": "Last structural calibration was due May 10, 2026. Delay caused by extended continuous feed run. Action required immediately to clear compliance audit."
+    }
+  ]
+}

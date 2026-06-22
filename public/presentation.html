@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Brain - Hackathon Presentation Deck</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-secondary: #121620;
+      --accent-cyan: #00d8ff;
+      --accent-amber: #ff9100;
+      --accent-emerald: #00e676;
+      --accent-rose: #ff3d00;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --glow-cyan: 0 0 20px rgba(0, 216, 255, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Presentation Frame */
+    .deck-container {
+      flex-grow: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      width: 90%;
+      max-width: 1100px;
+      height: 80vh;
+      max-height: 650px;
+      background: rgba(20, 26, 38, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 50px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: slideIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 20px;
+    }
+
+    .slide-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .slide-body {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin: 30px 0;
+    }
+
+    .slide-content-left {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .slide-content-right {
+      flex: 0.8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      height: 100%;
+      min-height: 250px;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      height: 70px;
+      background: #0e121a;
+      border-top: 1px solid #1a2233;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 100;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      background: #273142;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--bg-primary) 0.3s;
+    }
+
+    .progress-dot.active {
+      background: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background: #192130;
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    /* Presentation Slide Details styling */
+    h1.title-large {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pitch-subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .bullet-point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .bullet-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 216, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Slide-specific graphic containers */
+    .graphic-box {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .graphic-icon {
+      font-size: 64px;
+      color: var(--accent-cyan);
+      text-shadow: var(--glow-cyan);
+      margin-bottom: 20px;
+    }
+
+    .arch-node {
+      background: #192130;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-align: center;
+      margin: 6px 0;
+      position: relative;
+    }
+
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .flow-arrow {
+      color: var(--accent-cyan);
+      font-size: 14px;
+      margin: 2px 0;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Slides -->
+  <div class="deck-container">
+    
+    <!-- Slide 1: Cover -->
+    <div class="slide active" id="slide-0">
+      <div class="slide-header">
+        <span class="slide-tag">Hackathon Pitch</span>
+        <span style="font-size: 13px; color: var(--text-muted);">Theme: Industrial Intelligence</span>
+      </div>
+      
+      <div class="slide-body">
+        <div class="slide-content-left" style="justify-content: center;">
+          <h1 class="title-large">Unified Asset &<br>Operations Brain</h1>
+          <p class="pitch-subtitle">
+            AI-powered knowledge engineering platform solving information fragmentation and operational knowledge loss in heavy asset industries.
+          </p>
+        </div>
+        <div class="slide-content-right">
+          <div class="graphic-box">
+            <div class="graphic-icon"><i class="fa-solid fa-brain"></i></div>
+            <h3 style="color: #fff; font-size: 20px;">Operations Brain</h3>
+            <span style="color: var(--text-muted); font-size: 13px;">Knowledge Engineering & Compliance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Press Right Arrow or Click Next to navigate</span>
+        <span>Slide 1 of 6</span>
+      </div>
+    </div>
+
+    <!-- Slide 2: The Problem Context -->
+    <div class="slide" id="slide-1">
+      <div class="slide-header">
+        <span class="slide-tag">The Challenge</span>
+        <span class="slide-title">The Industrial Knowledge Cliff</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-content-left">
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div>
+              <strong>35% Working Hours Lost</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Engineers spend more than a third of their day searching for historical information across disconnected legacy systems.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <div>
+              <strong>7 to 12 Disconnected Repositories</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Drawings, operating procedures, work history logs, and regulations are completely isolated.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <strong>18-22% Unplanned Downtime</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Indian heavy plants face massive outages because field technicians lack instant equipment repair context.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <div class="graphic-box" style="text-align: left;">
+            <h4 style="color: var(--accent-rose); font-size: 18px; margin-bottom: 12px;"><i class="fa-solid fa-skull-crossbones"></i> The Risk Compound</h4>
+            <p style="font-size: 14px; line-height: 1.5; color: var(--text-muted);">
+              <strong>25% of Senior Operators will retire</strong> in the next decade. When they leave, decades of undocumented tribal operational knowledge disappears forever.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Industrial Operations Brain</span>
+        <span>Slide 2 of 6</span>
+      </div>
+    </div>
+
+    <!-- Slide 3: The Solution -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <span class="slide-tag">Our Innovation</span>
+        <span class="slide-title">Unified Operations Brain Solution</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-content-left">
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-file-shield"></i></div>
+            <div>
+              <strong>Universal Ingestion & OCR parsing</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Automatically extracts equipment tags (e.g. V-202) and process limits from drawings and text files using intelligent NLP.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+            <div>
+              <strong>Continuous Knowledge Graph Linkage</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Dynamically links documents, specifications, incident logs, and Indian regulatory clauses to equipment assets.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-message"></i></div>
+            <div>
+              <strong>Dense + Graph Context RAG Copilot</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Answers engineering and troubleshooting queries, providing exact citations and file paths for safety verification.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <div class="graphic-box">
+            <div class="graphic-icon" style="color: var(--accent-emerald); text-shadow: 0 0 15px rgba(0, 230, 118, 0.3);"><i class="fa-solid fa-shield-halved"></i></div>
+            <h4 style="color:#fff; font-size: 18px;">RCA & Compliance Hub</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Traverses relationships to build root cause reports and compliance audit packages instantly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Industrial Operations Brain</span>
+        <span>Slide 3 of 6</span>
+      </div>
+    </div>
+
+    <!-- Slide 4: Tech Stack & Architecture -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <span class="slide-tag">Under the Hood</span>
+        <span class="slide-title">MVC Architecture & AI Flow</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-content-left">
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-cubes"></i></div>
+            <div>
+              <strong>Express Node.js MVC Structure</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Decoupled Models (for Documents, Graph, Compliance, Maintenance), Controllers (API routers), and Views (Dashboard UI).</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-dna"></i></div>
+            <div>
+              <strong>Rule-Based NLP & Vector retrieval</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Processes text, parses tags with high reliability, indexes terms, and scores query relevance with footnote source mappings.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-gamepad"></i></div>
+            <div>
+              <strong>Physics-based 2D Graph Engine</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Custom layout simulation utilizing canvas rendering to keep node interfaces responsive without heavy dependencies.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <div class="arch-flow">
+            <div class="arch-node" style="border-color: var(--accent-cyan);">Ingested PDF/Manual</div>
+            <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+            <div class="arch-node">NLP Parser Service</div>
+            <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+            <div class="arch-node" style="border-color: var(--accent-emerald);">Ontology Graph Model</div>
+            <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+            <div class="arch-node" style="border-color: var(--accent-amber);">RAG Search / RCA Generator</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Industrial Operations Brain</span>
+        <span>Slide 4 of 6</span>
+      </div>
+    </div>
+
+    <!-- Slide 5: Business Impact -->
+    <div class="slide" id="slide-4">
+      <div class="slide-header">
+        <span class="slide-tag">Value Proposition</span>
+        <span class="slide-title">Measurable Business Impact</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-content-left">
+          <div class="bullet-point">
+            <div class="bullet-icon" style="color: var(--accent-emerald); background: rgba(0, 230, 118, 0.1);"><i class="fa-solid fa-bolt"></i></div>
+            <div>
+              <strong>Minimize Unplanned Downtime</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Providing instant historical context and calibration specs to engineers during outages reduces mean-time-to-repair (MTTR) by 15-20%.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon" style="color: var(--accent-cyan); background: rgba(0, 216, 255, 0.1);"><i class="fa-solid fa-file-signature"></i></div>
+            <div>
+              <strong>Automated Regulatory Compliance</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Continuous checking against Factory Acts / PESO rules reduces safety compliance penalty exposures by auto-generating audit packages.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon" style="color: var(--accent-amber); background: rgba(255, 145, 0, 0.1);"><i class="fa-solid fa-shield"></i></div>
+            <div>
+              <strong>Mitigating the Knowledge Cliff</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">As senior operators retire, their inputs, email logs, and incident checklists are digested into the graph, remaining forever queryable.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <div class="graphic-box">
+            <div style="font-size: 52px; font-weight: 800; color: var(--accent-emerald);">~20%</div>
+            <h4 style="margin-top: 10px; color:#fff;">Downtime Cost Reduction</h4>
+            <span style="font-size: 12px; color: var(--text-muted); display: block; margin-top: 4px;">Based on standard plant models YTD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Industrial Operations Brain</span>
+        <span>Slide 5 of 6</span>
+      </div>
+    </div>
+
+    <!-- Slide 6: Vision & Next Steps -->
+    <div class="slide" id="slide-5">
+      <div class="slide-header">
+        <span class="slide-tag">Looking Forward</span>
+        <span class="slide-title">The Roadmap to Scaling</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-content-left">
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+            <div>
+              <strong>Computer Vision Drawing Digitser</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Integrate vision LLMs to parse scanned piping P&ID schematics and locate physical instrumentation nodes directly.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <div>
+              <strong>Real-Time IIoT Telemetry Feeds</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Stream vibration, heat, and telemetry directly into the graph nodes, raising automated failure alert tickets.</p>
+            </div>
+          </div>
+          <div class="bullet-point">
+            <div class="bullet-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <div>
+              <strong>Field Technician Wearables</strong>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Scale copilot RAG as a voice-driven AR/Mobile application assisting operators on high-voltage substations directly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-content-right" style="border-color: var(--accent-emerald);">
+          <div class="graphic-box">
+            <div class="graphic-icon" style="color: var(--accent-emerald); text-shadow: var(--glow-cyan);"><i class="fa-solid fa-rocket"></i></div>
+            <h4 style="color:#fff; font-size: 18px;">Ready for Production</h4>
+            <span style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 6px;">Thank You! Questions?</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Industrial Operations Brain</span>
+        <span>Slide 6 of 6</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <div class="progress-dots" id="dots-container">
+      <!-- Dots added by JS -->
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="nav-btn" id="btn-prev-slide"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+      <button class="nav-btn" id="btn-next-slide">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlideIdx = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots-container');
+    const btnPrev = document.getElementById('btn-prev-slide');
+    const btnNext = document.getElementById('btn-next-slide');
+
+    // Init progress dots
+    slides.forEach((slide, idx) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${idx === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => showSlide(idx));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.progress-dot');
+
+    function showSlide(idx) {
+      if (idx < 0 || idx >= slides.length) return;
+
+      slides[currentSlideIdx].classList.remove('active');
+      dots[currentSlideIdx].classList.remove('active');
+
+      currentSlideIdx = idx;
+
+      slides[currentSlideIdx].classList.add('active');
+      dots[currentSlideIdx].classList.add('active');
+    }
+
+    btnPrev.addEventListener('click', () => {
+      showSlide(currentSlideIdx - 1);
+    });
+
+    btnNext.addEventListener('click', () => {
+      if (currentSlideIdx === slides.length - 1) {
+        showSlide(0); // Loop
+      } else {
+        showSlide(currentSlideIdx + 1);
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        btnNext.click();
+      } else if (e.key === 'ArrowLeft') {
+        btnPrev.click();
+      }
+    });
+  </script>
+</body>
+</html>
